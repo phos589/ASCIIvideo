@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+}
+
+#webcamContainer, #asciiContainer{
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#asciiContainer{
+  transition: transform 0.3s ease;
+}
+#zoom-in,#textColorPicker {
+  margin: 10px;
+}
+
+#webcamContainer, #imageUpload {
+  height: 5vh;
+}
+#asciiContainer img {
+  margin-right: 40px;
+}
+
+#asciiArt {
+  font-family: monospace;
+  font-size: 14px;
+  line-height: 8px;
+  white-space: pre-wrap;
+  padding: 2px;
+}
+
+label {
+  background-color: #3498db;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+#videoInput {
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 5px;
+}
+#videoInput:hover{
+  background-color: #3477db;
+}
+#buttonContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+#buttonContainer button{
+  margin: 10px;
+}
