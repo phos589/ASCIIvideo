@@ -3,6 +3,15 @@ let asciiVideoElement;
 let playing = false;
 let fontSize = 1;
 
+// Function to change the ASCII color
+function changeAsciiColor(color) {
+    asciiVideoElement.style.color = color;
+}
+// Event listener for the color picker input
+colorPicker.addEventListener('input', function() {
+const selectedColor = colorPicker.value;
+changeAsciiColor(selectedColor);
+});
 
 // Function to adjust the font size of the ASCII art based on video dimensions and window size.
 function adjustFontSize(videoWidth, videoHeight) {
