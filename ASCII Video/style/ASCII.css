@@ -1,77 +1,56 @@
 body {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
   font-family: Arial, sans-serif;
+  background-color: #f2f2f2;
 }
 
-#webcamContainer, #asciiContainer{
-  margin: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#asciiContainer{
-  transition: transform 0.3s ease;
-}
-#zoom-in,#textColorPicker {
-  margin: 10px;
-}
-
-#webcamContainer, #imageUpload {
-  height: 5vh;
-}
-#asciiContainer img {
-  margin-right: 40px;
-}
-
-#asciiArt {
-  font-family: monospace;
-  font-size: 14px;
-  line-height: 8px;
-  white-space: pre-wrap;
-  padding: 2px;
-}
-
-label {
-  background-color: #3498db;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
+#buttonContainer {
+  margin-top: 20px;
+  text-align: center;
 }
 
 button {
-  background-color: #4caf50;
-  color: white;
   padding: 10px 20px;
+  margin: 5px;
+  background-color: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 5px;
   cursor: pointer;
-}
-
-button:hover {
-  background-color: #45a049;
-}
-
-#videoInput {
-  padding: 10px;
-  font-size: 16px;
-  border: 2px solid #ccc;
   border-radius: 5px;
 }
-#videoInput:hover{
-  background-color: #3477db;
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
-#buttonContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px;
+#videoInput {
+ display: none;
 }
-#buttonContainer button{
-  margin: 10px;
+.custom-file-input {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+#fileInputLabel {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+#asciiContainer {
+  margin-top: 20px;
+  text-align: center;
+}
+
+#asciiVideo {
+  padding: 20px;
+  border-radius: 5px;
+  font-family: monospace;
 }

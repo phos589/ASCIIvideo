@@ -1,43 +1,60 @@
 let videoElement;
 let asciiVideoElement;
 let playing = false;
-let fontSize = 16;
+let fontSize = 1;
 
-// Function to handle zoom in button click
+
+// Function to adjust the font size of the ASCII art based on video dimensions and window size.
+function adjustFontSize(videoWidth, videoHeight) {
+    const maxFontSize = 10;
+    const minFontSize = 2;
+    const fontSizeX = Math.floor(window.innerWidth / videoWidth);
+    const fontSizeY = Math.floor(window.innerHeight / videoHeight);
+
+    const newFontSize = Math.min(maxFontSize, Math.max(minFontSize, Math.min(fontSizeX, fontSizeY)));
+    asciiVideoElement.style.fontSize = newFontSize + 'px';
+}
+
 document.getElementById('zoomInButton').addEventListener('click', function () {
-    fontSize += 2; 
-    asciiVideoElement.style.fontSize = fontSize + 'px';
-});
-
-// Function to handle zoom out button click
-document.getElementById('zoomOutButton').addEventListener('click', function () {
-    if (fontSize > 2) {
-        fontSize -= 2; 
+    if(fontSize < 10){
+        fontSize += 1; 
         asciiVideoElement.style.fontSize = fontSize + 'px';
     }
 });
 
+document.getElementById('zoomOutButton').addEventListener('click', function () {
+    if (fontSize > 1) {
+        fontSize -= 1; 
+        asciiVideoElement.style.fontSize = fontSize + 'px';
+    }
+});
+
+// Function to play the video.
 function playVideo() {
-    if (videoElement) {
+    if (videoElement && !playing) { 
         playing = true;
         document.getElementById('playButton').disabled = true;
         document.getElementById('stopButton').disabled = false;
 
-        // Wait for the video to load and obtain its dimensions
+        videoElement.play(); 
+
         videoElement.addEventListener('loadedmetadata', function () {
             const canvas = new OffscreenCanvas(videoElement.videoWidth, videoElement.videoHeight);
             canvas.willReadFrequently = true;
             const context = canvas.getContext('2d');
+            adjustFontSize(videoElement.videoWidth, videoElement.videoHeight);
 
+            // Function to render frames continuously.
             function renderFrame() {
-                if (!playing) {
-                    return;
+                if (playing) {
+                    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+                    const asciiFrame = frameToASCII(context.getImageData(0, 0, canvas.width, canvas.height));
+                    asciiVideoElement.textContent = asciiFrame;
+                } 
+                else if (videoElement.paused) {
+                    asciiVideoElement.textContent = "Video Paused";
                 }
-
-                context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
-                const asciiFrame = frameToASCII(context.getImageData(0, 0, canvas.width, canvas.height));
-                asciiVideoElement.textContent = asciiFrame;
-
+            
                 requestAnimationFrame(renderFrame);
             }
 
@@ -45,16 +62,13 @@ function playVideo() {
         });
     }
 }
-
-// Function to stop playing the video as ASCII
+// Function to stop playing the video.
 function stopVideo() {
     playing = false;
     document.getElementById('playButton').disabled = false;
     document.getElementById('stopButton').disabled = true;
-    asciiVideoElement.textContent = '';
 }
-
-// Function to convert a video frame to ASCII
+// Function to convert a video frame to ASCII art.
 function frameToASCII(imageData) {
     const { data, width, height } = imageData;
     const asciiCharacters = ['@', '#', 'S', '%', '?', '*', '+', ';', ':', ','];
@@ -80,8 +94,7 @@ function frameToASCII(imageData) {
 
     return asciiFrame;
 }
-
-// Event listener for the video input
+// Event listener for the file input to select a video file.
 document.getElementById('videoInput').addEventListener('change', function (event) {
     const file = event.target.files[0];
     if (file) {
@@ -98,6 +111,5 @@ document.getElementById('videoInput').addEventListener('change', function (event
     }
 });
 
-// Event listeners for play and stop buttons
 document.getElementById('playButton').addEventListener('click', playVideo);
 document.getElementById('stopButton').addEventListener('click', stopVideo);
