@@ -12,11 +12,16 @@
     <button id="stopButton" disabled>Stop</button>
     <button id="zoomInButton">Zoom In</button>
     <button id="zoomOutButton">Zoom Out</button>
+    <button id="downloadButton">Download GIF</button>
     <input type="color" id="colorPicker" value="#00000">
 </div>
   <div id="asciiContainer">
     <pre id="asciiVideo"></pre>
+    <img id="asciiGif" alt="ASCII GIF">
+    <canvas style="display: none;"></canvas>
   </div>
+
+    <script src="https://cdn.rawgit.com/jnordberg/gif.js/0.2.0/dist/gif.js"></script>
     <script type="module" src="script/ASCII.js"></script>
   </body>
 </html>
